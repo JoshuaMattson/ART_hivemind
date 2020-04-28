@@ -1,0 +1,113 @@
+//////////////////////////////////      SETUP
+
+static final int NUM_LINES_OUTER = 150;
+static final int NUM_LINES_INNER = 60;
+float t = 1;
+
+void setup(){
+  frameRate(29);
+  size(500,500);
+  rotateX(t);
+  rotateY(t);
+}
+
+
+/////////////////////////////////  SHAPE CREATION
+
+void draw(){
+  background(142,155,228);
+  strokeWeight(0.5);
+  translate(width/2, height/2);
+  
+  // inner prism shape
+  for(int i = 0; i < NUM_LINES_INNER; i++) {
+   
+    // Core
+    strokeWeight(0.8);
+    stroke(18,23,51,i*20);
+    line(coreX1(t + i), coreY1(t + i), coreX2(t+i), coreY2(t+i));
+   
+    // Prism
+    strokeWeight(1);
+    stroke(18,23,51, i*20);
+    line(prismx1(t + i), prismy1(t + i), prismx2(t+i), prismy2(t+i));
+  }
+  
+  // outside swirling shapes
+  for(int i = 0; i < NUM_LINES_OUTER; i++) {
+    
+    // Swirl A
+    strokeWeight(0.5);
+    stroke(91,102,184,i*20);
+    line(swirlAx1(t + i), swirlAy1(t + i * 2), swirlAx2(t+i), swirlAy2(t+i));
+    
+    // Swirl B
+    stroke(181,195,243);
+    line(swirlBx1(t + i), swirlBy1(t + i * 3), swirlBx2(t+i), swirlBy2(t+i));
+  }
+  t += 0.5;
+}
+
+
+////////////////////////////////////// FUNCTIONS
+
+// CORE Structure
+float coreX1(float t) {
+  return sin(t/80) * cos(t/3) * cos(t/2);
+}
+float coreY1(float t) {
+  return cos(t/3) * + 1;
+}
+//Second Structure
+float coreX2(float t) {
+  return sin(t/3)  * 10;
+}
+float coreY2(float t) {
+  return cos(t/3)  * -10 + 1;
+}
+
+// PRISM Structure
+float prismx1(float t) {
+  return sin(t/80) * cos(t/3) * cos(t/2);
+}
+float prismy1(float t) {
+  return cos(t/3) * -100 + 1;
+}
+//Second Structure
+float prismx2(float t) {
+  return sin(t/3)  * 10;
+}
+float prismy2(float t) {
+  return cos(t/3)  * -10 + 1;
+}
+
+
+// Swirl A Structure
+float swirlAx1(float t) {
+  return sin(t/30) * 200;
+}
+float swirlAy1(float t) {
+  return cos(t/30)  * 100;
+}
+//Second Structure
+float swirlAx2(float t) {
+  return sin(t/30) * 20;
+}
+float swirlAy2(float t) {
+  return cos(t/30) * 100;
+}
+
+// Swirl B Structure
+float swirlBx1(float t) {
+  return sin(t/30) * -200;
+}
+float swirlBy1(float t) {
+  return cos(t/30)  * -100;
+}
+//Second Structure
+float swirlBx2(float t) {
+  return sin(t/30) * -20;
+}
+float swirlBy2(float t) {
+  return cos(t/30) * -100;
+}
